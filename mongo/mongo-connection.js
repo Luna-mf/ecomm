@@ -1,5 +1,3 @@
-console.log('Iniciando ecomm');
-
 let mongoose = require('mongoose');
 
 async function GetProducts()

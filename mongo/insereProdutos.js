@@ -1,5 +1,5 @@
 console.log("Olá mundo!");
-var arrayProducts = [];
+//var arrayProducts = [];
 const readline = require('readline');
 const fs = require('fs');
 
@@ -10,10 +10,9 @@ async function readFileByLine(file)
       input: fileStream,
       crlfDelay: Infinity
     });
-/*rl.forEach((element, index) => {
     
-});*/
     var i = 1;
+    var arrayProducts = [];
     for await (const line of rl) {
         
         if(i == 1){
