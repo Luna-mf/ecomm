@@ -15,12 +15,12 @@ async function VerifyProductsCollection()
     var data = await GetData({}, product);
     if(data.length == 0)
     {
-        console.log("Necessário inserir data");
+        console.log("Necessário inserir dados de produto");
         insereProducts.AddProductsToMongo();
     }
     else
     {
-        console.log("Dados encontrados");
+        console.log("Dados de produto encontrados");
     }
 }
 
@@ -29,12 +29,12 @@ async function VerifyCategoriesCollection()
     var data = await GetData({}, category);
     if(data.length == 0)
     {
-        console.log("Necessário inserir data");
+        console.log("Necessário inserir dados de produtos");
         insereCategories.AddCategoriesToMongo();
     }
     else
     {
-        console.log("Dados encontrados");
+        console.log("Dados de categoria encontrados");
     }
 }
 
