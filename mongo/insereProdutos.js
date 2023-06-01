@@ -2,6 +2,8 @@ console.log("Olá mundo!");
 //var arrayProducts = [];
 const readline = require('readline');
 const fs = require('fs');
+var mongoose = require('mongoose');
+var product = require('./schemas/product');
 
 async function readFileByLine(file)
 {
@@ -12,7 +14,7 @@ async function readFileByLine(file)
     });
     
     var i = 1;
-    var arrayProducts = [];
+    var arrayProducts = [product];
     for await (const line of rl) {
         
         if(i == 1){
@@ -40,13 +42,17 @@ async function readFileByLine(file)
 
 async function AddProductsToMongo()
 {
-    var lista = await readFileByLine("./ecomm-produtos.csv");
+    var lista = await readFileByLine("./mongo/ecomm-produtos.csv");
+    await product.insertMany(lista);
     //console.log(lista);
 
-    use("ecomm");
-    var insert = db.products.insertMany(lista);
+    // use("ecomm");
+    // var insert = db.products.insertMany(lista);
+
 }
-AddProductsToMongo();
+//AddProductsToMongo();
+
+module.exports = {AddProductsToMongo};
 
 
 
