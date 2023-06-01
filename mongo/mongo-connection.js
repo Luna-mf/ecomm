@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var product = require('./schemas/product');
+var category = require('./schemas/category');
 var insereProducts = require('./insereProdutos');
+var insereCategories = require('./insereCategorias');
  
 
 async function PrintProducts(){
@@ -8,7 +10,7 @@ async function PrintProducts(){
     console.log(JSON.stringify(listProducts));
 }
 
-async function InsertProducts()
+async function VerifyProductsCollection()
 {
     var data = await GetData({}, product);
     if(data.length == 0)
@@ -19,13 +21,21 @@ async function InsertProducts()
     else
     {
         console.log("Dados encontrados");
-        insereProducts.AddProductsToMongo();
     }
 }
 
-async function InsertCategories()
+async function VerifyCategoriesCollection()
 {
-
+    var data = await GetData({}, category);
+    if(data.length == 0)
+    {
+        console.log("Necessário inserir data");
+        insereCategories.AddCategoriesToMongo();
+    }
+    else
+    {
+        console.log("Dados encontrados");
+    }
 }
 
 async function GetData(filter, model)
@@ -34,7 +44,7 @@ async function GetData(filter, model)
     return data;
 }
 
-module.exports = {PrintProducts, InsertProducts};
+module.exports = {PrintProducts, VerifyProductsCollection, VerifyCategoriesCollection};
 
 /*async function IsProductCollectionWithData()
 {

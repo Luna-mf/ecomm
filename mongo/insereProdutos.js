@@ -14,7 +14,7 @@ async function readFileByLine(file)
     });
     
     var i = 1;
-    var arrayProducts = [product];
+    var arrayProducts = [];
     for await (const line of rl) {
         
         if(i == 1){

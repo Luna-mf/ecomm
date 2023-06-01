@@ -2,5 +2,6 @@
 var db = require('../mongo/db');
 var mongo = require('../mongo/mongo-connection');
 
-mongo.InsertProducts();
+mongo.VerifyProductsCollection();
+mongo.VerifyCategoriesCollection();
 console.log('Iniciando ecomm');
