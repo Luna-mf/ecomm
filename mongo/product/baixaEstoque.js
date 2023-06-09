@@ -1,6 +1,6 @@
 use("ecomm");
 
-var product = db.products.findOne({nome:"Galaxy Tab S8", quantidadeEmEstoque: {$gte: 2}});
+var product = db.products.findOne({nome:"Galaxy Tab S8"});
 
 console.log("product has stock - ", product.quantidadeEmEstoque);
 
