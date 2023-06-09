@@ -1,6 +1,6 @@
 use("ecomm");
 
-var product = db.products.findOne({nome:"Galaxy Tab S8"});
+var product = db.products.findOne({nome:"Galaxy Tab S8", quantidadeEmEstoque: {$gte: 2}});
 
 console.log("product has stock - ", product.quantidadeEmEstoque);
 
@@ -12,3 +12,7 @@ else
 {
     console.log("Produto não tem estoque o suficiente");
 }
+
+//Usando apenas um comando no mongoDB:
+//var product = db.products.updateOne({nome:"Galaxy Tab S8", quantidadeEmEstoque: {$gte: 2}},
+//                                    {$inc: {quantidadeEmEstoque: -2}});
