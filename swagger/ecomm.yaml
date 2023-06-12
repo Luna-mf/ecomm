@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    An api used for Alura level Up - Next Dev
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: category
+    description: Category methods
+paths:
+  /api/categories:
+    get:
+      tags:
+        - category
+      summary: Get all categories
+      description: Returns a map categorie name and status
+      operationId: getCategories
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/categories"
+        '404':
+          description: Nenhuma categoria encontrada
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/categories:
+    post:
+      tags:
+        - category
+      summary: Create a category
+      description: Returns a map categorie name and status
+      operationId: postCategories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/categoryPost"
+      responses:
+        '201':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhuma categoria encontrada
+          content:
+            application/json:
+              example: "Not Found"
+components:
+  schemas:
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/category"
+    categoryPost:
+      type: object
+      properties:
+        nome:
+            type: string
