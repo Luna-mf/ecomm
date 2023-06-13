@@ -67,8 +67,20 @@ export default class CategoryService{
           },
         body: JSON.stringify(categoryToCreate)
         });
+        await processResponse(response);
+    }
+
+    static async updateCategory(categoryToUpdate, id){
+        //var form = new FormData(categoryToCreate);
+        const response = await fetch(`${host}/categories/${id}`, {
+        method: "PUT",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(categoryToUpdate)
+        });
         
-        console.log(response.status);
         await processResponse(response);
     }
 

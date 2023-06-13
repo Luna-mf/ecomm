@@ -32,6 +32,12 @@ async function processarComando(argumentos){
             const file = await CategoryService.readJsonAsync(fileName);
             CategoryService.createCategory(file);
             break;
+        case '--atualizarCategoria':
+            let categoryId = argumentos[3];
+            let fileCategoryToUpdate = argumentos[4];
+            const categoryToUpdate = await CategoryService.readJsonAsync(fileCategoryToUpdate);
+            CategoryService.updateCategory(categoryToUpdate, categoryId);
+            break;
         default:
             console.log(`Sorry, we are out of ${argumentos[2]}.`);
         }
