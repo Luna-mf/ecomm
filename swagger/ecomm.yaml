@@ -161,6 +161,32 @@ paths:
       summary: Get all products
       description: Returns all products
       operationId: getProducts
+      parameters:
+        - name: idCategory
+          in: query
+          description: ID of the product category
+          required: false
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          description: Min price
+          required: false
+          schema:
+            type: number
+        - name: maxPrice
+          in: query
+          description: Max price
+          required: false
+          schema:
+            type: number
+        - name: minStock
+          in: query
+          description: Min stock
+          required: false
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
           description: successful operation
