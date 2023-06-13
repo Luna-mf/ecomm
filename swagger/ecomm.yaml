@@ -12,7 +12,7 @@ servers:
 tags:
   - name: category
     description: Category methods
-  - name: product
+  - name: products
 paths:
   /api/categories:
     get:
