@@ -38,6 +38,10 @@ async function processarComando(argumentos){
             const categoryToUpdate = await CategoryService.readJsonAsync(fileCategoryToUpdate);
             CategoryService.updateCategory(categoryToUpdate, categoryId);
             break;
+        case '--excluirCategoria':
+            let categoryIdToDelete = argumentos[3];
+            CategoryService.deleteCategory(categoryIdToDelete);
+            break;
         default:
             console.log(`Sorry, we are out of ${argumentos[2]}.`);
         }

@@ -84,6 +84,19 @@ export default class CategoryService{
         await processResponse(response);
     }
 
+    static async deleteCategory(id){
+        //var form = new FormData(categoryToCreate);
+        const response = await fetch(`${host}/categories/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        await processResponse(response);
+    }
+
     static async readJsonAsync(path){
         try {
             const encoding = 'utf-8';

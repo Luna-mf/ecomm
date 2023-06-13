@@ -34,16 +34,6 @@
       "nome": "AUTOMÓVEIS",
       "status": "ATIVA",
       "id": 7
-    },
-    {
-      "id": 8,
-      "nome": "LIVROS",
-      "status": "ATIVA"
-    },
-    {
-      "nome": "VESTUÁRIO",
-      "status": "ATIVA",
-      "id": 9
     }
   ]
 }
