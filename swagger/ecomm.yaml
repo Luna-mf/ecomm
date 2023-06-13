@@ -13,6 +13,7 @@ tags:
   - name: category
     description: Category methods
   - name: products
+  - name: users
 paths:
   /api/categories:
     get:
@@ -271,6 +272,129 @@ paths:
           content:
             application/json:
               example: "Bad Request"
+              
+  /api/users:
+    get:
+      tags:
+        - users
+      summary: Get all users
+      description: Returns all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/users"
+        '404':
+          description: Nenhum usuário encontrada
+          content:
+            application/json:
+              example: "Not Found"
+              
+              
+              
+              
+  /api/users/{idUser}:
+    get:
+      tags:
+        - users
+      summary: Get a user
+      description: Returns a user
+      operationId: getUser
+      parameters:
+        - name: idUser
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/users/create:
+    post:
+      tags:
+        - users
+      summary: Creater a user
+      description: Returns user created
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/users/update:
+    put:
+      tags:
+        - users
+      summary: Update a user
+      description: Returns user updated
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/users/remove:
+    delete:
+      tags:
+        - users
+      summary: delete a user
+      operationId: deleteUser
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
 components:
   schemas:
     category:
@@ -329,3 +453,64 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/product"
+    userDTO:
+      type: object
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        rua:
+          type: string
+        numero:
+          type: string
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+    user:
+      type: object
+      properties:
+        _id:
+          type: string
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        data_criacao:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    users:
+      type: array
+      items:
+        $ref: "#/components/schemas/user"
