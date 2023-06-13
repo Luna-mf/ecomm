@@ -27,8 +27,10 @@ async function processarComando(argumentos){
             let idCategory = argumentos[3];
             await CategoryService.findCategoryById(idCategory);
             break;
-        case '--algumaCoisa2':
-            console.log('Oranges are $0.59 a pound.');
+        case '--inserirCategoria':
+            let fileName = argumentos[3];
+            const file = await CategoryService.readJsonAsync(fileName);
+            CategoryService.createCategory(file);
             break;
         default:
             console.log(`Sorry, we are out of ${argumentos[2]}.`);
