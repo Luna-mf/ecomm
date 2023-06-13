@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Swagger Petstore - OpenAPI 3.0
+  title: Swagger ecomm - OpenAPI 3.0
   description: |-
     An api used for Alura level Up - Next Dev
   license:
@@ -57,6 +57,102 @@ paths:
           content:
             application/json:
               example: "Not Found"
+  /api/admin/categories/update:
+    put:
+      tags:
+        - category
+      summary: Update a category
+      description: Returns category updated
+      operationId: updateCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/categoryPost'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/categories/remove/{idCategory}:
+    delete:
+      tags:
+        - category
+      summary: Remove a category
+      description: Returns category updated
+      operationId: removeCategory
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/categories/active/{idCategory}:
+    put:
+      tags:
+        - category
+      summary: Active a category
+      description: Returns category updated
+      operationId: activeCategory
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+              
+              
+              
   /api/products:
     get:
       tags:
@@ -194,7 +290,9 @@ components:
       type: object
       properties:
         nome:
-            type: string
+          type: string
+        status:
+          type: string
     product:
       type: object
       properties:
