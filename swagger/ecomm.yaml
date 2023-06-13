@@ -300,7 +300,7 @@ paths:
     get:
       tags:
         - users
-      summary: Get a user
+      summary: Get an user
       description: Returns a user
       operationId: getUser
       parameters:
@@ -327,7 +327,7 @@ paths:
     post:
       tags:
         - users
-      summary: Creater a user
+      summary: Creater an user
       description: Returns user created
       operationId: createUser
       requestBody:
@@ -351,7 +351,7 @@ paths:
     put:
       tags:
         - users
-      summary: Update a user
+      summary: Update an user
       description: Returns user updated
       operationId: updateUser
       requestBody:
@@ -380,7 +380,7 @@ paths:
     delete:
       tags:
         - users
-      summary: delete a user
+      summary: delete an user
       operationId: deleteUser
       responses:
         '200':
@@ -395,6 +395,60 @@ paths:
           content:
             application/json:
               example: "Bad Request"
+              
+              
+  
+  /api/orders/{idOrder}:
+    get:
+      tags:
+        - orders
+      summary: Get an order
+      description: Returns a order
+      operationId: getOrder
+      parameters:
+        - name: idOrder
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+        '404':
+          description: Nenhuma order encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/orders/create:
+    post:
+      tags:
+        - orders
+      summary: Creater a order
+      description: Returns order created
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/orderDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhuma url encontrado
+          content:
+            application/json:
+              example: "Not Found"
 components:
   schemas:
     category:
@@ -514,3 +568,77 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/user"
+    order:
+      type: object
+      properties:
+        _id:
+          type: string
+        dataPedido:
+          type: string
+        account:
+          type: object
+          properties:
+            account_id:
+              type: string
+            nome:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              quantidade:
+                type: string
+              precoUnitario:
+                type: number
+    orders:
+      type: array
+      items:
+        $ref: "#/components/schemas/order"
+    orderDTO:
+      type: object
+      properties:
+        id_client:
+          type: string
+        rua:
+          type: string
+        numero:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        uf:
+          type: string
+        complemento:
+          type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              quantidade:
+                type: string
+              valorDesconto:
+                type: number
+              precoUnitario:
+                type: number
