@@ -1,16 +1,16 @@
-import fs from 'fs';
+import fs from "fs";
 
-const host = 'http://localhost:3000';
+const host = "http://localhost:3000";
 
 async function processResponse(response) {
     if (response.status === 200 || response.status === 201) {
         const jsonData = await response.json();
-        console.log('response status: ', response.status);
+        console.log("response status: ", response.status);
         console.log(jsonData);
     } else if (response.status === 404) {
-        console.log('Erro 404, valor ou url incorreta, verifique a chamada e tente novamente!');
+        console.log("Erro 404, valor ou url incorreta, verifique a chamada e tente novamente!");
     } else {
-        console.log('Erro indefinido, verifique a chamada e tente novamente!');
+        console.log("Erro indefinido, verifique a chamada e tente novamente!");
     }
 }
 
@@ -69,10 +69,10 @@ export default class CategoryService {
         // console.log(categoryToCreate);
         // var form = new FormData(categoryToCreate);
         const response = await fetch(`${host}/categories`, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+                Accept: "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(categoryToCreate),
         });
@@ -82,10 +82,10 @@ export default class CategoryService {
     static async updateCategory(categoryToUpdate, id) {
         // var form = new FormData(categoryToCreate);
         const response = await fetch(`${host}/categories/${id}`, {
-            method: 'PUT',
+            method: "PUT",
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+                Accept: "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(categoryToUpdate),
         });
@@ -95,10 +95,10 @@ export default class CategoryService {
     static async deleteCategory(id) {
         // var form = new FormData(categoryToCreate);
         const response = await fetch(`${host}/categories/${id}`, {
-            method: 'DELETE',
+            method: "DELETE",
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+                Accept: "application/json",
+                "Content-Type": "application/json",
             },
         });
         await processResponse(response);
@@ -106,12 +106,12 @@ export default class CategoryService {
 
     static async readJsonAsync(path) {
         try {
-            const encoding = 'utf-8';
+            const encoding = "utf-8";
             const texto = await fs.promises.readFile(path, encoding);
             const jsonObject = JSON.parse(texto);
             return jsonObject;
         } catch (erro) {
-            console.log('Deu erro aqui!');
+            console.log("Deu erro aqui!");
         }
         return null;
     }

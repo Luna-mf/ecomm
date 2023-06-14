@@ -16,6 +16,7 @@
         "quotes": [1, "double"],
         "no-plusplus": 0,
         "no-continue": 0,
-        "no-underscore-dangle": 0
+        "no-underscore-dangle": 0,
+        "no-console": 0
     }
 }
