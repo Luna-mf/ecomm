@@ -2,27 +2,36 @@ import fs from 'fs';
 
 const host = 'http://localhost:3000';
 
+async function processResponse(response) {
+    if (response.status === 200 || response.status === 201) {
+        const jsonData = await response.json();
+        console.log('response status: ', response.status);
+        console.log(jsonData);
+    } else if (response.status === 404) {
+        console.log('Erro 404, valor ou url incorreta, verifique a chamada e tente novamente!');
+    } else {
+        console.log('Erro indefinido, verifique a chamada e tente novamente!');
+    }
+}
 
-export default class CategoryService{
-
-    static async findCategories(){
-        let response = await fetch("http://localhost:3000/categories");
+export default class CategoryService {
+    static async findCategories() {
+        const response = await fetch(`${host}/categories`);
         await processResponse(response);
         // const jsonData = await response.json();
         // console.log('response status: ', response.status);
         // console.log(jsonData);
     }
 
-    static async findCategoryById(idCategory){
-        let response = await fetch(`http://localhost:3000/categories/${idCategory}`);
+    static async findCategoryById(idCategory) {
+        const response = await fetch(`http://localhost:3000/categories/${idCategory}`);
         await processResponse(response);
         // const jsonData = await response.json();
         // console.log('response status: ', response.status);
         // console.log(jsonData);
     }
 
-    /*
-    ler e salvar dados em um arquivo:
+    /* ler e salvar dados em um arquivo:
     static async createCategory(categoryToCreate){
         const encoding = 'utf-8';
         const path = './src/cli/db.json';
@@ -37,8 +46,8 @@ export default class CategoryService{
             return Math.max(a, b);
           }, -Infinity);
 
-        // const maxId = listCategories.reduce(function(prev, current) { 
-        //     return prev.id > current.id ? prev : current; 
+        // const maxId = listCategories.reduce(function(prev, current) {
+        //     return prev.id > current.id ? prev : current;
         // });
 
         categoryToCreate.id = max+1;
@@ -54,73 +63,56 @@ export default class CategoryService{
           });
           console.log("response status: 201")
           console.log(categoryToCreate);
-    }*/
+    } */
 
-    static async createCategory(categoryToCreate){
-        //console.log(categoryToCreate);
-        //var form = new FormData(categoryToCreate);
+    static async createCategory(categoryToCreate) {
+        // console.log(categoryToCreate);
+        // var form = new FormData(categoryToCreate);
         const response = await fetch(`${host}/categories`, {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        body: JSON.stringify(categoryToCreate)
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(categoryToCreate),
         });
         await processResponse(response);
     }
 
-    static async updateCategory(categoryToUpdate, id){
-        //var form = new FormData(categoryToCreate);
+    static async updateCategory(categoryToUpdate, id) {
+        // var form = new FormData(categoryToCreate);
         const response = await fetch(`${host}/categories/${id}`, {
-        method: "PUT",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        body: JSON.stringify(categoryToUpdate)
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(categoryToUpdate),
         });
-        
         await processResponse(response);
     }
 
-    static async deleteCategory(id){
-        //var form = new FormData(categoryToCreate);
+    static async deleteCategory(id) {
+        // var form = new FormData(categoryToCreate);
         const response = await fetch(`${host}/categories/${id}`, {
-        method: "DELETE",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
         });
-        
         await processResponse(response);
     }
 
-    static async readJsonAsync(path){
+    static async readJsonAsync(path) {
         try {
             const encoding = 'utf-8';
             const texto = await fs.promises.readFile(path, encoding);
-            let jsonObject = JSON.parse(texto);
+            const jsonObject = JSON.parse(texto);
             return jsonObject;
-        } catch (erro)
-        {
-            console.log("Deu erro aqui!")
+        } catch (erro) {
+            console.log('Deu erro aqui!');
         }
+        return null;
     }
 }
-
-async function processResponse(response){
-        if(response.status == 200 || response.status == 201){
-            const jsonData = await response.json();
-            console.log('response status: ', response.status);
-            console.log(jsonData);
-        }
-        else if(response.status == 404){
-            console.log("Erro 404, valor ou url incorreta, verifique a chamada e tente novamente!");
-        }
-        else{
-            console.log("Erro indefinido, verifique a chamada e tente novamente!");
-        }
-}
-

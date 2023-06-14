@@ -1,11 +1,11 @@
 db.use("ecomm");
 
-db.createCollection("accounts",{
+db.createCollection("accounts", {
     validator: {
-        $jsonSchema: 
+        $jsonSchema:
         {
-            "bsonType":"object",
-            "required": [
+            bsonType: "object",
+            required: [
                 "_id",
                 "nome",
                 "email",
@@ -14,79 +14,76 @@ db.createCollection("accounts",{
                 "cpf",
                 "telefone",
                 "endereco"],
-            "additionalProperties": false,
-            "bsonType": "object",
-            "properties":{
-                "_id":{
-                    "bsonType": "objectId"
+            additionalProperties: false,
+            properties: {
+                _id: {
+                    bsonType: "objectId",
                 },
-                "nome":{
-                    "bsonType": "string",
-                    "minLength": 5
+                nome: {
+                    bsonType: "string",
+                    minLength: 5,
                 },
-                "email":{
-                    "bsonType": "string",
-                    "minLength": 5
+                email: {
+                    bsonType: "string",
+                    minLength: 5,
                 },
-                "senha":{
-                    "bsonType": "string",
-                    "minLength": 5
+                senha: {
+                    bsonType: "string",
+                    minLength: 5,
                 },
-                "data_criacao":{
-                    "bsonType": "date",
+                data_criacao: {
+                    bsonType: "date",
                 },
-                "cpf":{
-                    "bsonType": "string",
-                    "minLength": 11,
-                    "maxLength": 11
+                cpf: {
+                    bsonType: "string",
+                    minLength: 11,
+                    maxLength: 11,
                 },
-                "telefone":{
-                    "bsonType": "string",
-                    "minLength": 10
+                telefone: {
+                    bsonType: "string",
+                    minLength: 10,
                 },
-                "endereco":{
-                    "bsonType": "object",
-                    "required": ["bairro", "rua", "numero", "cep", "cidade", "uf"],
-                    "properties":{
-                        "bairro":{
-                            "bsonType": "string",
-                            "minLength": 1
+                endereco: {
+                    bsonType: "object",
+                    required: ["bairro", "rua", "numero", "cep", "cidade", "uf"],
+                    properties: {
+                        bairro: {
+                            bsonType: "string",
+                            minLength: 1,
                         },
-                        "rua":{
-                            "bsonType": "string",
-                            "minLength": 1
+                        rua: {
+                            bsonType: "string",
+                            minLength: 1,
                         },
-                        "numero":{
-                            "bsonType": "string",
-                            "minLength": 1
+                        numero: {
+                            bsonType: "string",
+                            minLength: 1,
                         },
-                        "complemento":{
-                            "bsonType": ["string","null"],
+                        complemento: {
+                            bsonType: ["string", "null"],
                         },
-                        "cep":{
-                            "bsonType": "string",
-                            "minLength": 8,
-                            "maxLength": 8
+                        cep: {
+                            bsonType: "string",
+                            minLength: 8,
+                            maxLength: 8,
                         },
-                        "cidade":{
-                            "bsonType": "string",
-                            "minLength":5
+                        cidade: {
+                            bsonType: "string",
+                            minLength: 5,
                         },
-                        "uf":{
-                            "bsonType": "string",
-                            "minLength":2,
-                            "maxLength": 2
-                        }
-                    }
-                }
-            }
-        }
-    }
+                        uf: {
+                            bsonType: "string",
+                            minLength: 2,
+                            maxLength: 2,
+                        },
+                    },
+                },
+            },
+        },
+    },
 });
 
-
-
-/*db.createCollection("accounts",{
+/* db.createCollection("accounts",{
    validator:{
          $jsonSchema
                 bsonType:"object",
@@ -109,4 +106,4 @@ db.createCollection("accounts",{
            }
      }
 
-});*/
+}); */

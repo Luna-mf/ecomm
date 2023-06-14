@@ -1,45 +1,46 @@
-//Comando para gerar um validation na collection de categories:
-db.runCommand( { collMod: "categories",
-     validator:{
-          $jsonSchema: {
+// Comando para gerar um validation na collection de categories:
+db.runCommand({
+    collMod: "categories",
+    validator: {
+        $jsonSchema: {
             bsonType: "object",
-            required: [ "nome", "status"],
+            required: ["nome", "status"],
             properties: {
-               nome: {
-                  bsonType: "string",
-                  description: "Nome da categoria"
-               },
-               status: {
-                  enum: [ "ATIVA", "INATIVA"],
-                  description: "Selecione entre ATIVA e INATIVA"
-               }
-            }
-          },
-          additionalProperties: false
-      }
+                nome: {
+                    bsonType: "string",
+                    description: "Nome da categoria",
+                },
+                status: {
+                    enum: ["ATIVA", "INATIVA"],
+                    description: "Selecione entre ATIVA e INATIVA",
+                },
+            },
+        },
+        additionalProperties: false,
+    },
 });
 
-
-db.runCommand( { collMod: "categories",
-     validator:{
+db.runCommand({
+    collMod: "categories",
+    validator:
+     {
          $jsonSchema: {
-         bsonType: "object",
-         "additionalProperties": false,
-         required: ["nome", "status"],
-         properties: {
-            "nome": {
-               bsonType: "string",
-               description: "Nome da categoria"
-            },
-            "status": {
-               enum: [ "ATIVA", "INATIVA"],
-               description: "Selecione entre ATIVA e INATIVA"
-            }
-         }
-      }
-   }
-})
-
+             bsonType: "object",
+             additionalProperties: false,
+             required: ["nome", "status"],
+             properties: {
+                 nome: {
+                     bsonType: "string",
+                     description: "Nome da categoria",
+                 },
+                 status: {
+                     enum: ["ATIVA", "INATIVA"],
+                     description: "Selecione entre ATIVA e INATIVA",
+                 },
+             },
+         },
+     },
+});
 
 /*
 {
