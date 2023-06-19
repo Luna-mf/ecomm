@@ -18,6 +18,8 @@
         "no-continue": 0,
         "no-underscore-dangle": 0,
         "no-console": 0,
-        "import/no-extraneous-dependencies": 1
+        "import/no-extraneous-dependencies": 1,
+        "new-cap": 1,
+        "prefer-destructuring": 0
     }
 }
