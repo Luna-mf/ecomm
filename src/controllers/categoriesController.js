@@ -1,7 +1,7 @@
 import categories from "../models/Category.js";
 
 function ValidateCategory(body) {
-    if (body.nome == null || body.nome === "" || body.nome.length < 3) {
+    if (body.nome == null || body.nome.length < 3) {
         throw new Error("Invalid argument: nome");
     }
 }
