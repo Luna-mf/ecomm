@@ -1,5 +1,11 @@
 import categories from "../models/Category.js";
 
+function ValidateCategory(body) {
+    if (body.nome == null || body.nome === "" || body.nome.length < 3) {
+        throw new Error("Invalid argument: nome");
+    }
+}
+
 class CategoryController {
     static listarCategorias = async (req, res) => {
         const categoriesFinded = await categories.find();
@@ -7,6 +13,13 @@ class CategoryController {
     };
 
     static cadastrarCategoria = async (req, res) => {
+        try {
+            ValidateCategory(req.body);
+        } catch (error) {
+            res.status(400).send({ errorMessage: error.message });
+            return;
+        }
+
         const livro = new categories(req.body);
 
         await livro.save();
@@ -79,5 +92,4 @@ class CategoryController {
         });
     }; */
 }
-
 export default CategoryController;
