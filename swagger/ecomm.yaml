@@ -34,6 +34,32 @@ paths:
           content:
             application/json:
               example: "Not Found"
+  /api/categories/{idCategory}:
+    get:
+      tags:
+        - category
+      summary: Get all categories
+      description: Returns a map categorie name and status
+      operationId: getCategoriyById
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhuma categoria encontrada Para o id informado
+          content:
+            application/json:
+              example: "Not Found"
   /api/admin/categories:
     post:
       tags:
