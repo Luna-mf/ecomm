@@ -8,6 +8,9 @@ const router = express.Router();
 router
     .get(`${base}/categories`, CategoryController.listarCategorias)
     .get(`${base}/categories/:id`, CategoryController.listarPorId)
-    .post(`${base}/categories`, CategoryController.cadastrarCategoria);
+    .put(`${base}/admin/categories/active/:id`, CategoryController.activeCategoryById)
+    .put(`${base}/admin/categories/update/:id`, CategoryController.updateById)
+    .delete(`${base}/admin/categories/remove/:id`, CategoryController.deleteById)
+    .post(`${base}/admin/categories`, CategoryController.cadastrarCategoria);
 
 export default router;
