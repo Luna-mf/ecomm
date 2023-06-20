@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import categories from "../models/Category.js";
 
 function ValidateCategory(body) {
@@ -19,8 +20,8 @@ class CategoryController {
             res.status(400).send({ errorMessage: error.message }).end();
             return;
         }
-
         const category = new categories(req.body);
+        category._id = new mongoose.Types.ObjectId();
 
         await category.save();
         res.status(201).send(category.toJSON()).end();
