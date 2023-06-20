@@ -1,8 +1,15 @@
 version: "3.9"
 services:
   ecomm:
-    image: ecomm:1.0
+    image: ecomm:3.0
     container_name: newecomm
+    build: '.'
+    depends_on:
+      - mongo-ecomm
+    links:
+      - mongo-ecomm
+    ports:
+      - 3000:3000
     networks:
       - compose-bridge
 
@@ -19,6 +26,8 @@ services:
     - type: bind
       source: C:\Users\n134415\Documents\projetos-github\ecomm\mongo
       target: /mongo-scripts
+    networks:
+      - compose-bridge
 
 networks:
   compose-bridge:

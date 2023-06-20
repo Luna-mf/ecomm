@@ -9,6 +9,8 @@ db.once("open", () => {
     console.log("conexão com o banco feita com sucesso");
 });
 
+console.log("Após conexão com o mongo");
+
 const app = express();
 app.use(express.json());
 routes(app);
