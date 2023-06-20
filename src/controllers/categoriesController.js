@@ -20,10 +20,10 @@ class CategoryController {
             return;
         }
 
-        const livro = new categories(req.body);
+        const category = new categories(req.body);
 
-        await livro.save();
-        res.status(201).send(livro.toJSON()).end();
+        await category.save();
+        res.status(201).send(category.toJSON()).end();
     };
 
     static listarPorId = async (req, res) => {
