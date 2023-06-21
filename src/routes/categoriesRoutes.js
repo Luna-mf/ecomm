@@ -9,7 +9,7 @@ router
     .get(`${base}/categories`, CategoryController.listarCategorias)
     .get(`${base}/categories/:id`, CategoryController.listarPorId)
     .put(`${base}/admin/categories/active/:id`, CategoryController.activeCategoryById)
-    .put(`${base}/admin/categories/update/:id`, CategoryController.updateById)
+    .put(`${base}/admin/categories/:id`, CategoryController.updateById)
     .delete(`${base}/admin/categories/remove/:id`, CategoryController.deleteById)
     .post(`${base}/admin/categories`, CategoryController.cadastrarCategoria);
 

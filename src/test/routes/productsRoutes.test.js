@@ -34,7 +34,7 @@ describe("GET em /api/products/", () => {
 
 let idResposta;
 
-describe("POST em /api/products", () => {
+describe("POST em /api/admin/products/", () => {
     it("Deve adicionar uma nova categoria", async () => {
         const resposta = await request(app)
             .post("/api/admin/products/")

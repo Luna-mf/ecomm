@@ -84,13 +84,20 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /api/admin/categories/update:
+  /api/admin/categories/{idCategory}:
     put:
       tags:
         - category
       summary: Update a category
       description: Returns category updated
       operationId: updateCategory
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -126,8 +133,7 @@ paths:
           description: ID of category
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         '200':
           description: successful operation
@@ -158,8 +164,7 @@ paths:
           description: ID of category
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         '200':
           description: successful operation
@@ -238,8 +243,7 @@ paths:
           description: ID of product
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         '200':
           description: successful operation
@@ -252,7 +256,7 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /api/admin/products/create:
+  /api/admin/products:
     post:
       tags:
         - products
@@ -276,13 +280,20 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /api/admin/products/update:
+  /api/admin/products/update/{idProduct}:
     put:
       tags:
         - products
       summary: Update a product
       description: Returns product updated
       operationId: updateProduct
+      parameters:
+        - name: idProduct
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -305,12 +316,19 @@ paths:
           content:
             application/json:
               example: "Bad Request"
-  /api/admin/products/remove:
+  /api/admin/products/remove/{idProduct}:
     delete:
       tags:
         - products
       summary: delete a product
       operationId: deleteProduct
+      parameters:
+        - name: idProduct
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: successful operation
@@ -343,11 +361,7 @@ paths:
           description: Nenhum usuário encontrada
           content:
             application/json:
-              example: "Not Found"
-              
-              
-              
-              
+              example: "Not Found"      
   /api/users/{idUser}:
     get:
       tags:
@@ -539,7 +553,10 @@ components:
         quantidadeEmEstoque:
           type: integer
         categoria:
-          type: string
+          type: object
+          properties:
+            id:
+              type: string
     productDTO:
       type: object
       properties:
@@ -554,7 +571,10 @@ components:
         quantidadeEmEstoque:
           type: integer
         categoria:
-          type: string
+          type: object
+          properties:
+            id:
+              type: string
     products:
       type: array
       items:
