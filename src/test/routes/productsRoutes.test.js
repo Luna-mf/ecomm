@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import request from "supertest";
 import {
     describe, expect, it, jest,
