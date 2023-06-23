@@ -9,6 +9,7 @@ info:
   version: 1.0.11
 servers:
   - url: http://localhost:3000
+  - url: http://localhost:3001
 tags:
   - name: category
     description: Category methods
@@ -120,7 +121,6 @@ paths:
           content:
             application/json:
               example: "Bad Request"
-  /api/admin/categories/remove/{idCategory}:
     delete:
       tags:
         - category
@@ -280,7 +280,7 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /api/admin/products/update/{idProduct}:
+  /api/admin/products/{idProduct}:
     put:
       tags:
         - products
@@ -316,7 +316,6 @@ paths:
           content:
             application/json:
               example: "Bad Request"
-  /api/admin/products/remove/{idProduct}:
     delete:
       tags:
         - products
@@ -389,31 +388,7 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /api/admin/users/create:
-    post:
-      tags:
-        - users
-      summary: Creater an user
-      description: Returns user created
-      operationId: createUser
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/userDTO'
-      responses:
-        '200':
-          description: successful operation
-          content:
-           application/json:
-              schema:
-                $ref: "#/components/schemas/product"
-        '404':
-          description: Nenhum produto encontrado
-          content:
-            application/json:
-              example: "Not Found"
-  /api/admin/users/update:
+  /api/admin/users:
     put:
       tags:
         - users
@@ -442,7 +417,29 @@ paths:
           content:
             application/json:
               example: "Bad Request"
-  /api/admin/users/remove:
+    post:
+      tags:
+        - users
+      summary: Creater an user
+      description: Returns user created
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
     delete:
       tags:
         - users
@@ -461,7 +458,11 @@ paths:
           content:
             application/json:
               example: "Bad Request"
-              
+      
+  # /api/admin/users/update:
+  
+  # /api/admin/users/remove:
+            
               
   
   /api/orders/{idOrder}:

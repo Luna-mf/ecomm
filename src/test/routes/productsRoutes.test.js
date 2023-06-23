@@ -69,7 +69,7 @@ describe("GET em /api/products/id", () => {
 describe("PUT em /api/admin/products/update/id", () => {
     it("Deve retornar recurso selecionado", async () => {
         await request(app)
-            .put(`/api/admin/products/update/${idResposta}`)
+            .put(`/api/admin/products/${idResposta}`)
             .send({
                 nome: "TesteIntegração-put",
                 descricao: "Teste-put",
@@ -87,7 +87,7 @@ describe("PUT em /api/admin/products/update/id", () => {
 describe("DeLETE em /api/admin/products/remove/id", () => {
     it("Deve retornar recurso selecionado", async () => {
         await request(app)
-            .del(`/api/admin/products/remove/${idResposta}`)
+            .del(`/api/admin/products/${idResposta}`)
             .expect(204);
     });
 });

@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   ecomm:
-    image: ecomm:3.0
+    image: ecomm:4.0
     container_name: newecomm
     build: '.'
     depends_on:
@@ -10,8 +10,10 @@ services:
       - mongo-ecomm
     ports:
       - 3000:3000
-    networks:
-      - compose-bridge
+    environment:
+      MONGO_HOST: mongo-ecomm
+    #networks:
+     # - compose-bridge
 
   mongo-ecomm:
     image: mongo
@@ -26,12 +28,12 @@ services:
     - type: bind
       source: C:\Users\n134415\Documents\projetos-github\ecomm\mongo
       target: /mongo-scripts
-    networks:
-      - compose-bridge
+    #networks:
+     # - compose-bridge
 
-networks:
-  compose-bridge:
-    driver: bridge
+#networks:
+  #compose-bridge:
+    #driver: bridge
 
 volumes:
   db-mong-ecomm:
