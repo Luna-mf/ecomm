@@ -1,0 +1,717 @@
+openapi: 3.0.3
+info:
+  title: Swagger ecomm - OpenAPI 3.0
+  description: |-
+    An api used for Alura level Up - Next Dev
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: http://localhost:3000
+  - url: http://localhost:3001
+tags:
+  - name: category
+    description: Category methods
+  - name: products
+  - name: users
+paths:
+  /api/categories:
+    get:
+      tags:
+        - category
+      summary: Get all categories
+      description: Returns a map categorie name and status
+      operationId: getCategories
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/categories"
+        '404':
+          description: Nenhuma categoria encontrada
+          content:
+            application/json:
+              example: "Not Found"
+  /api/categories/{idCategory}:
+    get:
+      tags:
+        - category
+      summary: Get all categories
+      description: Returns a map categorie name and status
+      operationId: getCategoriyById
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhuma categoria encontrada Para o id informado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/categories:
+    post:
+      tags:
+        - category
+      summary: Create a category
+      description: Returns a map categorie name and status
+      operationId: postCategories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/categoryPost"
+      responses:
+        '201':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhuma categoria encontrada
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/categories/{idCategory}:
+    put:
+      tags:
+        - category
+      summary: Update a category
+      description: Returns category updated
+      operationId: updateCategory
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/categoryPost'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+    delete:
+      tags:
+        - category
+      summary: Remove a category
+      description: Returns category updated
+      operationId: removeCategory
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/categories/active/{idCategory}:
+    put:
+      tags:
+        - category
+      summary: Active a category
+      description: Returns category updated
+      operationId: activeCategory
+      parameters:
+        - name: idCategory
+          in: path
+          description: ID of category
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+              
+              
+              
+  /api/products:
+    get:
+      tags:
+        - products
+      summary: Get all products
+      description: Returns all products
+      operationId: getProducts
+      parameters:
+        - name: idCategory
+          in: query
+          description: ID of the product category
+          required: false
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          description: Min price
+          required: false
+          schema:
+            type: number
+        - name: maxPrice
+          in: query
+          description: Max price
+          required: false
+          schema:
+            type: number
+        - name: minStock
+          in: query
+          description: Min stock
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/products"
+        '404':
+          description: Nenhum produto encontrada
+          content:
+            application/json:
+              example: "Not Found"
+  /api/products/{idProduct}:
+    get:
+      tags:
+        - products
+      summary: Get all products
+      description: Returns all products
+      operationId: getProduct
+      parameters:
+        - name: idProduct
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/products:
+    post:
+      tags:
+        - products
+      summary: Creater a product
+      description: Returns product created
+      operationId: createProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/products/{idProduct}:
+    put:
+      tags:
+        - products
+      summary: Update a product
+      description: Returns product updated
+      operationId: updateProduct
+      parameters:
+        - name: idProduct
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+    delete:
+      tags:
+        - products
+      summary: delete a product
+      operationId: deleteProduct
+      parameters:
+        - name: idProduct
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+              
+  /api/users:
+    get:
+      tags:
+        - users
+      summary: Get all users
+      description: Returns all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/users"
+        '404':
+          description: Nenhum usuário encontrada
+          content:
+            application/json:
+              example: "Not Found"      
+  /api/users/{idUser}:
+    get:
+      tags:
+        - users
+      summary: Get an user
+      description: Returns a user
+      operationId: getUser
+      parameters:
+        - name: idUser
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/users:
+    put:
+      tags:
+        - users
+      summary: Update an user
+      description: Returns user updated
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+    post:
+      tags:
+        - users
+      summary: Creater an user
+      description: Returns user created
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhum produto encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      tags:
+        - users
+      summary: delete an user
+      operationId: deleteUser
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: "Not Found"
+        '400':
+          description: Request mal formada
+          content:
+            application/json:
+              example: "Bad Request"
+      
+  # /api/admin/users/update:
+  
+  # /api/admin/users/remove:
+            
+              
+  
+  /api/orders/{idOrder}:
+    get:
+      tags:
+        - orders
+      summary: Get an order
+      description: Returns a order
+      operationId: getOrder
+      parameters:
+        - name: idOrder
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+        '404':
+          description: Nenhuma order encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/orders/create:
+    post:
+      tags:
+        - orders
+      summary: Creater a order
+      description: Returns order created
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/orderDTO'
+      responses:
+        '200':
+          description: successful operation
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        '404':
+          description: Nenhuma url encontrado
+          content:
+            application/json:
+              example: "Not Found"
+components:
+  schemas:
+    category:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/category"
+    categoryPost:
+      type: object
+      properties:
+        nome:
+          type: string
+        status:
+          type: string
+    product:
+      type: object
+      properties:
+        _id:
+          type: string
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        quantidadeEmEstoque:
+          type: integer
+        categoria:
+          type: object
+          properties:
+            id:
+              type: string
+    productDTO:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        precoUnitario:
+          type: number
+        quantidadeEmEstoque:
+          type: integer
+        categoria:
+          type: object
+          properties:
+            id:
+              type: string
+    products:
+      type: array
+      items:
+        $ref: "#/components/schemas/product"
+    userDTO:
+      type: object
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        rua:
+          type: string
+        numero:
+          type: string
+        complemento:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        estado:
+          type: string
+    user:
+      type: object
+      properties:
+        _id:
+          type: string
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        data_criacao:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    users:
+      type: array
+      items:
+        $ref: "#/components/schemas/user"
+    order:
+      type: object
+      properties:
+        _id:
+          type: string
+        dataPedido:
+          type: string
+        account:
+          type: object
+          properties:
+            account_id:
+              type: string
+            nome:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              quantidade:
+                type: string
+              precoUnitario:
+                type: number
+    orders:
+      type: array
+      items:
+        $ref: "#/components/schemas/order"
+    orderDTO:
+      type: object
+      properties:
+        id_client:
+          type: string
+        rua:
+          type: string
+        numero:
+          type: string
+        cep:
+          type: string
+        cidade:
+          type: string
+        uf:
+          type: string
+        complemento:
+          type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              quantidade:
+                type: string
+              valorDesconto:
+                type: number
+              precoUnitario:
+                type: number

@@ -1,0 +1,48 @@
+{
+    "$jsonSchema": {
+        "required":[
+            "_id",
+            "nome",
+            "descricao",
+            "slug",
+            "precoUnitario",
+            "quantidadeEmEstoque",
+            "categoria"],
+        "additionalProperties": false,
+        "bsonType": "object",
+        "properties": {
+            "_id":{
+                "bsonType": "objectId"
+            },
+            "nome": {
+                "description": "Nome do produto",
+                "bsonType": "string",
+                "minLength":5
+            },
+            "descricao": {
+                "description": "Descrição do produto",
+                "bsonType": "string",
+                "minLength":10
+            },
+            "slug": {
+                "description": "",
+                "bsonType": "string",
+                "minLength":5
+            },
+            "precoUnitario": {
+                "description": "Preço do produto",
+                "bsonType": ["double","int"]
+            },
+            "quantidadeEmEstoque": {
+                "description": "Quantidade do produto em estoque",
+                "bsonType": "int",
+                "minimum": 0
+            },
+            "categoria": {
+                "description": "Categoria do produto",
+                "bsonType": "string",
+                "enum":["AUTOMOTIVA", "CELULARES", "INFORMÁTICA", "LIVROS", "MÓVEIS"]
+            }
+        }
+    }
+}

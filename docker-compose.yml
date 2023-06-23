@@ -1,10 +1,19 @@
 version: "3.9"
 services:
   ecomm:
-    image: ecomm:1.0
+    image: ecomm:4.0
     container_name: newecomm
-    networks:
-      - compose-bridge
+    build: '.'
+    depends_on:
+      - mongo-ecomm
+    links:
+      - mongo-ecomm
+    ports:
+      - 3000:3000
+    environment:
+      MONGO_HOST: mongo-ecomm
+    #networks:
+     # - compose-bridge
 
   mongo-ecomm:
     image: mongo
@@ -17,12 +26,14 @@ services:
     volumes:
     - db-mong-ecomm:/data/db
     - type: bind
-      source: C:\Users\n134415\OneDrive - Santander Office 365\Documentos\projetos-github\ecomm/mongo
+      source: C:\Users\n134415\Documents\projetos-github\ecomm\mongo
       target: /mongo-scripts
+    #networks:
+     # - compose-bridge
 
-networks:
-  compose-bridge:
-    driver: bridge
+#networks:
+  #compose-bridge:
+    #driver: bridge
 
 volumes:
   db-mong-ecomm:
