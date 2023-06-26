@@ -17,7 +17,7 @@ services:
     volumes:
     - db-mong-ecomm:/data/db
     - type: bind
-      source: C:\Users\n134415\OneDrive - Santander Office 365\Documentos\projetos-github\ecomm/mongo
+      source: C:\Users\n134415\Documents\projetos-github\ecomm\mongo
       target: /mongo-scripts
 
 networks:
