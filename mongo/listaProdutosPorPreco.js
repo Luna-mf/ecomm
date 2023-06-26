@@ -1,13 +1,16 @@
 use("ecomm");
-var products = db.products.find(
-    {$and: 
-    [
-        {"precoUnitario":{$gte: 1000}},
-        {"precoUnitario":{$lte: 2000}}
-    ]},
+const products = db.products.find(
     {
-        nome:1,
-        precoUnitario: 1
-    });
+        $and:
+    [
+        { precoUnitario: { $gte: 1000 } },
+        { precoUnitario: { $lte: 2000 } },
+    ],
+    },
+    {
+        nome: 1,
+        precoUnitario: 1,
+    },
+);
 
 console.log(products);
